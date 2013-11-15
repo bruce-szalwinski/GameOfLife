@@ -38,16 +38,17 @@ class GameOfLife {
 
   def neighborCount(x,y) {
 
+    def ordinals = [
+      [-1, -1], [0, -1], [1, -1],
+      [-1,  0],        , [1, 0],
+      [-1,  1], [0,  1], [1, 1]
+    ]
     def neighbors = 0
 
-    for (ny in y-1 .. y+1) {
-      for (nx in x-1 .. x+1) {
-        if (nx != x || ny != y) {
-          if (isCellAlive(nx, ny)) {
-             ++neighbors
-          }
-        }
-      }        
+    ordinals.each {
+      if (isCellAlive(x + it[0], y + it[1])) {
+        ++neighbors
+      }
     }
 
     return neighbors
